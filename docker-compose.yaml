@@ -5,24 +5,19 @@ services:
    image: nginx:1.13
    restart: always
    ports:
-   - 80:80
-   - 443:443
+    - 80:80
+    - 443:443
    volumes:
-   - ./nginx/conf.d:/etc/nginx/conf.d
+    - ./nginx/conf.d:/etc/nginx/conf.d
    depends_on:
-   - app
+    - app
 
   mongodb:
-    container_name: some-mongo
+    container_name: mongodb
     image: mongo:3.6
-    environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
-    volumes:
-      - ./data/db:/data/db
     ports:
-        - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+      - 27017:27017
+    command: mongod
 
   app:
     restart: always
